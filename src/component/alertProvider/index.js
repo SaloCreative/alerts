@@ -15,6 +15,11 @@ export default class AlertProvider extends React.Component {
     this.insertAlert = (alert) => {
       this.setState({ alerts: addAlert(alert, this.state.alert) });
     };
+    this.timoutAlert = (alertID, time) => {
+      setTimeout(() => {
+        this.setState({ alerts: removeAlert(alertID, this.state.alert) });
+      }, time * 1000);
+    };
     this.state = {
       alerts: [{
         message: 'My alert message text',
@@ -24,14 +29,15 @@ export default class AlertProvider extends React.Component {
         id
       }],
       deleteAlert: this.deleteAlert,
-      insertAlert: this.insertAlert
+      insertAlert: this.insertAlert,
+      timoutAlert: this.timoutAlert
     };
   }
   render() {
     const { children } = this.props;
-    const { alerts, deleteAlert, insertAlert } = this.state;
+    const { alerts, deleteAlert, insertAlert, timoutAlert } = this.state;
     return (
-      <AlertsProvider value={ { alerts, deleteAlert, insertAlert } }>
+      <AlertsProvider value={ { alerts, deleteAlert, insertAlert, timoutAlert } }>
         { children }
       </AlertsProvider>
     );

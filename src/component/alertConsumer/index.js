@@ -7,13 +7,14 @@ export default class Alerts extends React.Component {
   render() {
     return (
       <AlertsConsumer>
-        { ({ alerts, deleteAlert }) => {
+        { ({ alerts, deleteAlert, timoutAlert }) => {
           // If no alerts return null
           return (
             <AlertsContainer
               alerts={ alerts }
-              { ...this.props }
               clearAlert={ (id) => deleteAlert(id) }
+              setAlertClear={ (id, time) => timoutAlert(id, time) }
+              { ...this.props }
             />
           );
         } }
