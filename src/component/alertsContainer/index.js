@@ -7,17 +7,17 @@ import { Container } from './styles';
 
 export default class AlertsContainer extends React.Component {
   render() {
-    const { alerts, topOffset, clearAlert, setAlertClear } = this.props;
+    const { alerts, topOffset, clearAlert, setAlertClear, closeIcon, colours } = this.props;
     if (alerts.length > 0) {
       return (
-        <Container className='alerts__wrapper' topOffset={ topOffset }>
+        <Container topOffset={ topOffset }>
           { alerts.map((alert, i) =>
                 (<Alert
                   key={ alert.id }
                   i={ i }
                   alert={ alert }
-                  closeIcon={ this.props.closeIcon }
-                  colours={ this.props.colours }
+                  closeIcon={ closeIcon }
+                  colours={ colours }
                   clearAlert={ (id) => clearAlert(id) }
                   setAlertClear={ (id, time) => setAlertClear(id, time) }
                 />)) }

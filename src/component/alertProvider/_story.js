@@ -5,23 +5,14 @@ import withReadme from 'storybook-readme/with-readme';
 import { withKnobs, number } from '@storybook/addon-knobs';
 
 // FEATURED COMPONENT //
-import { AlertsContainer } from '../../index';
+import { AlertProvider, AlertConsumer } from '../../index';
 import README from './README.md';
 
 // START OF CONTAINER
-export const stories = storiesOf('Alert Container', module);
+export const stories = storiesOf('Alert Provider', module);
 stories.addDecorator(withReadme(README));
 stories.addDecorator(withKnobs);
 const id = Math.floor((Math.random() * 9999) + 1000);
-
-// Dummy data
-const alerts = [{
-  message: 'My alert message text',
-  type: 'success',
-  dismissible: true,
-  time: 10,
-  id
-}];
 
 stories.add(
   'Implementation',
@@ -29,10 +20,9 @@ stories.add(
     const topOffset = number('Top offset', 125);
 
     return (
-      <AlertsContainer
-        topOffset={ topOffset }
-        alerts={ alerts }
-      />
+      <AlertProvider>
+        <AlertConsumer topOffset={ topOffset } />
+      </AlertProvider>
     );
   })
 );

@@ -2,8 +2,8 @@ import { createContext } from 'react';
 
 const { Provider, Consumer } = createContext({
   alerts: [],
-  removeAlert: () => {},
-  addAlert: () => {}
+  deleteAlert: () => {},
+  insertAlert: () => {}
 });
 
 export { Provider, Consumer };
