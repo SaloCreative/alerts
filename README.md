@@ -1,100 +1,126 @@
-# react-redux-alerts
+# Alert
 
-Description of component and any special notes
+Alerts can be used in complete isolation but are designed to be used inside an alerts wrapper/provider to allow simplified state management.
+
+---
 
 ## Usage
 
 Install
 
 ```
-yarn add @salocreative/react-redux-alerts
+yarn add @salocreative/alerts
 ```
 
-Include the Alerts component at the top of the component it's required in.
-
-```
-import { Alerts } from '@salocreative/react-redux-alerts';
+```javascript
+import { Alert } from '@salocreative/alerts';
 ```
 
-Implement as follows
+```javascript
+<Alert
+  // Prop containing an alert object
+  alert={ {
+    message: 'My alert message goes here',
+    dismissible={ true },
+    time={ 10 },
+    type='success',
+    id={ 213 }
+  } }
 
-```
-<Alerts alerts={ this.props.systemAlerts } />
-```
+  // Pass in function to clear the alert
+  clearAlert={ (id) => this.clearAlert(id) }
 
-In order to make sure the alerts are in your state you need to include the system alerts reducer into your combine reducer function.
-
-in your reducer index include:
-
-```
-import { systemAlerts } from '@salocreative/react-redux-alerts';
-```
-and add to your combine reducer function. Next make sure that `systemAlerts` is mapped to props and connected to your component
-
-## ADD ALERTS
-You can add alerts either via the `API_FAILURE` or `ADD_ALERT` action types. Both of these should be imported from this package. Although functionality is currently the same they are deliberately seperated for future development.
-
-Both actions need to be dispatched with a payload as below:
-
-```
-return {
-    type: API_FAILURE,
-    payload: {
-      errorMessage: {
-       type: 'error',
-       message: 'My failure message goes here'
-     }
-    }
-};
-
+  // Pass in function to clear alert after set time
+  setAlertClear={ (id, time) => this.timeOutAlert(id, time) }
+/>
 ```
 
-or ADD_ALERT as per:
+# AlertsContainer
+
+The alerts container can be used to easily encapsulate multiple alert messages in you your app where you wish to manage your own context or integrate with another system such as react.
+
+---
+
+## Usage
+
+Install
 
 ```
-return {
-   type: ADD_ALERT,
-   payload: {
-     message: {
-       type: 'success',
-       message: 'My alert message goes here'
-     }
-   }
- };
+yarn add @salocreative/alerts
 ```
 
-## Setting alert timeout
-
-The alerts will automatically remove themselves after 5 seconds. You can customise this in the payload by setting an additional key in the message of time (this is in seconds). eg.
-
-```
-return {
-   type: ADD_ALERT,
-   payload: {
-     message: {
-       type: 'success',
-       message: 'My alert message goes here',
-       time: 20
-     }
-   }
- };
+```javascript
+import { AlertsContainer } from '@salocreative/alerts';
 ```
 
-## Remove Alerts
-Currently alerts timeout after 5s and are removed from state. It is possible to manually remove all alerts from state via the following action types
+```javascript
+<AlertsContainer
+  topOffset={ 140 }
+  closeIcon={ <span>X</span> }
+  colours={ {
+    error: '#D0021B',
+    warning: '#F6A623',
+    info: '#8F8F8F',
+    success: '#00A44C'
+  } }
+  alerts={ [...{}] }
+  clearAlert={ (id) => this.clearAlert(id) }
+  setAlertClear={ (id, time) => this.timeOutAlert(id, time) }
+/>
+```
+
+# AlertProvider
+
+The alert provider uses the React context api to allow for state management of the alerts throughout your application. You can include the example provider at any level of your application and then the consumer can be placed anywhere in the tree below it. The consumer will have access to not only the alerts but also the methods for removing the alerts. 
+
+---
+
+## Usage
+
+Install
 
 ```
-return {
-   type: CLEAR_ALL_SYSTEM_ALERTS
-
-};
+yarn add @salocreative/alerts
 ```
 
-### Further Development
-- [ ] Add ability to set dismissable true/false
-- [x] Ability to set timeouts per alert
-- [x] Improve documentation
+```javascript
+import { AlertProvider, AlertConsumer } from '@salocreative/alerts';
+```
 
-## LICENSE
+```javascript
+<AlertProvider>
+  // ...My tree of components
+  <AlertConsumer />
+</AlertProvider>
+```
 
-MIT
+The `AlertConsumer` will pass down any props given to it to the `AlertContainer` component so you can pass in the following props for the `AlertContainer` at this level.
+
+- `closeIcon`
+- `colours`
+- `topOffset`
+
+e.g.
+
+```javascript
+<AlertProvider>
+  <AlertConsumer
+    colours={ { error: '#D0021B', warning: '#F6A623', info: '#8F8F8F', success: '#00A44C' } }
+    topOffset={ 125 }
+    closeIcon={ <span>X</span> }
+  />
+</AlertProvider>
+```
+
+## Standalone consumer
+
+When using the `AlertProvider` there is no need to pass in the functions for removing the alerts or the `AlertsContainer` itself as these are already bundled into the Provider/Consumer. If you want to add alerts without adding an additional display then you can import the `Consumer` to your component directly and access the methods from there. e.g.
+
+```javascript
+import { Consumer as AlertsConsumer } from '@salocreative/alerts';
+
+<AlertsConsumer>
+        { ({ alerts, deleteAlert, insertAlert }) => {
+          // ...your code here
+        } }
+```
