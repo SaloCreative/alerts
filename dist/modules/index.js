@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Consumer = exports.Provider = exports.guidGenerator = exports.addAlert = exports.removeAlert = exports.AlertContainer = exports.Alert = undefined;
+exports.Consumer = exports.Provider = exports.guidGenerator = exports.addAlert = exports.removeAlert = exports.AlertConsumer = exports.AlertProvider = exports.AlertsContainer = exports.Alert = undefined;
 
 var _alert = require('./component/alert');
 
@@ -16,10 +16,28 @@ Object.defineProperty(exports, 'Alert', {
 
 var _alertsContainer = require('./component/alertsContainer');
 
-Object.defineProperty(exports, 'AlertContainer', {
+Object.defineProperty(exports, 'AlertsContainer', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_alertsContainer).default;
+  }
+});
+
+var _alertProvider = require('./component/alertProvider');
+
+Object.defineProperty(exports, 'AlertProvider', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_alertProvider).default;
+  }
+});
+
+var _alertConsumer = require('./component/alertConsumer');
+
+Object.defineProperty(exports, 'AlertConsumer', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_alertConsumer).default;
   }
 });
 

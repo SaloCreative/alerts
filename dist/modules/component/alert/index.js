@@ -27,8 +27,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // STYLES
 
 
-var Alert = function (_Component) {
-  _inherits(Alert, _Component);
+var Alert = function (_React$Component) {
+  _inherits(Alert, _React$Component);
 
   function Alert() {
     _classCallCheck(this, Alert);
@@ -108,7 +108,7 @@ var Alert = function (_Component) {
   }]);
 
   return Alert;
-}(_react.Component);
+}(_react2.default.Component);
 
 Alert.defaultProps = {
   colours: {

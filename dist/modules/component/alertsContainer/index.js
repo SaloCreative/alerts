@@ -41,25 +41,25 @@ var AlertsContainer = function (_React$Component) {
   _createClass(AlertsContainer, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           alerts = _props.alerts,
           topOffset = _props.topOffset,
           _clearAlert = _props.clearAlert,
-          _setAlertClear = _props.setAlertClear;
+          _setAlertClear = _props.setAlertClear,
+          closeIcon = _props.closeIcon,
+          colours = _props.colours;
 
       if (alerts.length > 0) {
         return _react2.default.createElement(
           _styles.Container,
-          { className: 'alerts__wrapper', topOffset: topOffset },
+          { topOffset: topOffset },
           alerts.map(function (alert, i) {
             return _react2.default.createElement(_index.Alert, {
               key: alert.id,
               i: i,
               alert: alert,
-              closeIcon: _this2.props.closeIcon,
-              colours: _this2.props.colours,
+              closeIcon: closeIcon,
+              colours: colours,
               clearAlert: function clearAlert(id) {
                 return _clearAlert(id);
               },

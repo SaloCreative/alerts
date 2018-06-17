@@ -31,25 +31,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 // FEATURED COMPONENT //
-var stories = exports.stories = (0, _react3.storiesOf)('Alert Container', module);
+var stories = exports.stories = (0, _react3.storiesOf)('Alert Provider', module);
 stories.addDecorator((0, _withReadme2.default)(_README2.default));
 stories.addDecorator(_addonKnobs.withKnobs);
 var id = Math.floor(Math.random() * 9999 + 1000);
 
-// Dummy data
-var alerts = [{
-  message: 'My alert message text',
-  type: 'success',
-  dismissible: true,
-  time: 10,
-  id: id
-}];
-
 stories.add('Implementation', (0, _addonInfo.withInfo)({ text: 'Dropdown with knobs for testing various permutations and combinations' })(function () {
   var topOffset = (0, _addonKnobs.number)('Top offset', 125);
 
-  return _react2.default.createElement(_index.AlertsContainer, {
-    topOffset: topOffset,
-    alerts: alerts
-  });
+  return _react2.default.createElement(
+    _index.AlertProvider,
+    null,
+    _react2.default.createElement(_index.AlertConsumer, { topOffset: topOffset })
+  );
 }));
