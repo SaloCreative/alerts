@@ -21,13 +21,7 @@ export default class AlertProvider extends React.Component {
       }, time * 1000);
     };
     this.state = {
-      alerts: [{
-        message: 'My alert message text',
-        type: 'success',
-        dismissible: true,
-        time: 10,
-        id
-      }],
+      alerts: [],
       deleteAlert: this.deleteAlert,
       insertAlert: this.insertAlert,
       timoutAlert: this.timoutAlert
