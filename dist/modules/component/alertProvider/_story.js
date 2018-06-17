@@ -34,7 +34,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var stories = exports.stories = (0, _react3.storiesOf)('Alert Provider', module);
 stories.addDecorator((0, _withReadme2.default)(_README2.default));
 stories.addDecorator(_addonKnobs.withKnobs);
-var id = Math.floor(Math.random() * 9999 + 1000);
 
 stories.add('Implementation', (0, _addonInfo.withInfo)({ text: 'Dropdown with knobs for testing various permutations and combinations' })(function () {
   var topOffset = (0, _addonKnobs.number)('Top offset', 125);

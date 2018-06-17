@@ -12,7 +12,6 @@ import README from './README.md';
 export const stories = storiesOf('Alert Provider', module);
 stories.addDecorator(withReadme(README));
 stories.addDecorator(withKnobs);
-const id = Math.floor((Math.random() * 9999) + 1000);
 
 stories.add(
   'Implementation',

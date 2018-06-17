@@ -14,6 +14,8 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _lodash = require('lodash');
+
 var _index = require('../../index');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -27,10 +29,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // COMPONENTS
 
 
-var id = Math.floor(Math.random() * 9999 + 1000);
-
 var AlertProvider = function (_React$Component) {
   _inherits(AlertProvider, _React$Component);
+
+  _createClass(AlertProvider, null, [{
+    key: 'getDerivedStateFromProps',
+    value: function getDerivedStateFromProps(nextProps, prevState) {
+      // Merge in any alerts we are passing down
+      var alertsToMerge = [];
+      if (nextProps.alerts) {
+        alertsToMerge = (0, _lodash.map)(nextProps.alerts, function (alert) {
+          if (!prevState.alertsToMerge.includes(alert.id)) {
+            prevState.insertAlert(alert, prevState.alerts);
+            return alert.id;
+          }
+          return null;
+        }).filter(function (item) {
+          return item;
+        });
+        if (!(0, _lodash.isEmpty)(alertsToMerge)) {
+          // Dispatch prop function to identify any ids being merged
+          if (nextProps.alertsMerged) {
+            nextProps.alertsMerged(alertsToMerge);
+          }
+        }
+      }
+      return { alertsToMerge: (0, _lodash.union)(prevState.alertsToMerge, alertsToMerge) };
+    }
+  }]);
 
   function AlertProvider() {
     _classCallCheck(this, AlertProvider);
@@ -49,6 +75,7 @@ var AlertProvider = function (_React$Component) {
       }, time * 1000);
     };
     _this.state = {
+      alertsToMerge: [],
       alerts: [],
       deleteAlert: _this.deleteAlert,
       insertAlert: _this.insertAlert,
@@ -81,4 +108,11 @@ var AlertProvider = function (_React$Component) {
 exports.default = AlertProvider;
 
 
-AlertProvider.propTypes = { children: _propTypes2.default.any.isRequired };
+AlertProvider.defaultProps = { alertsMerged: function alertsMerged(alerts) {
+    return console.log(alerts);
+  } };
+
+AlertProvider.propTypes = {
+  alertsMerged: _propTypes2.default.func,
+  children: _propTypes2.default.any.isRequired
+};

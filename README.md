@@ -94,6 +94,22 @@ import { AlertProvider, AlertConsumer } from '@salocreative/alerts';
 </AlertProvider>
 ```
 
+## Advanced usage
+
+In order to provide backwards compatibility for use with other state management such as redux it is possible to merge external arrays of alerts into the provider. The provider accepts an optional `alerts` prop. If an array of alerts is provided then the Provider will merge them into its state and then provide a callback so that redux can be updated to remove the items from its state to maintain a single source of truth. The callback will return and array of alert ids as provided to it (*n.b.* when alerts are mapped to state in the Provider their id's are changed but a ref to the original is maintained to prevent duplications).
+
+```javascript
+<AlertProvider
+  alerts={ alerts }
+  alertsMerged={ (alerts) => this.removeOriginalAlerts() }
+>
+  // ...My tree of components
+  <AlertConsumer />
+</AlertProvider>
+```
+
+## Consumer
+
 The `AlertConsumer` will pass down any props given to it to the `AlertContainer` component so you can pass in the following props for the `AlertContainer` at this level.
 
 - `closeIcon`
