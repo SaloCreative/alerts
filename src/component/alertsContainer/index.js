@@ -7,7 +7,7 @@ import { Container } from './styles';
 
 export default class AlertsContainer extends React.Component {
   render() {
-    const { alerts, topOffset } = this.props;
+    const { alerts, topOffset, clearAlert, setAlertClear } = this.props;
     if (alerts.length > 0) {
       return (
         <Container className='alerts__wrapper' topOffset={ topOffset }>
@@ -18,6 +18,8 @@ export default class AlertsContainer extends React.Component {
                   alert={ alert }
                   closeIcon={ this.props.closeIcon }
                   colours={ this.props.colours }
+                  clearAlert={ (id) => clearAlert(id) }
+                  setAlertClear={ (id, time) => setAlertClear(id, time) }
                 />)) }
         </Container>
       );
@@ -30,7 +32,9 @@ AlertsContainer.propTypes = {
   alerts: PropTypes.array,
   closeIcon: PropTypes.any,
   colours: PropTypes.object,
-  topOffset: PropTypes.number
+  topOffset: PropTypes.number,
+  setAlertClear: PropTypes.func,
+  clearAlert: PropTypes.func
 };
 
 AlertsContainer.defaultProps = {
@@ -42,5 +46,7 @@ AlertsContainer.defaultProps = {
     info: '#8F8F8F',
     success: '#00A44C'
   },
-  topOffset: 0
+  topOffset: 0,
+  clearAlert: (id) => console.log(`Clear alert from container ${ id }`),
+  setAlertClear: (id, time) => console.log(`Alert ${ id } will clear from container in ${ time } seconds`)
 };

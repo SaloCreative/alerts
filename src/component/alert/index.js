@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { AlertWrapper, Close } from './styles';
 
 class Alert extends Component {
-
   componentDidMount() {
     const { alert, setAlertClear } = this.props;
     if (this.isDismissible() && this.hasAutoTimeout()) {
@@ -26,11 +25,11 @@ class Alert extends Component {
   renderClose() {
     const { alert, closeIcon, clearAlert } = this.props;
     if (this.isDismissible()) {
-      return(
+      return (
         <Close className='alert__close' onClick={ () => clearAlert(alert.id) } role='button' tabIndex='-1'>
-        { closeIcon }
-      </Close>
-      )
+          { closeIcon }
+        </Close>
+      );
     }
     return null;
   }
@@ -39,14 +38,14 @@ class Alert extends Component {
     const { alert, colours } = this.props;
     if (alert) {
       return (
-          <AlertWrapper className={ `alert ${ alert.type }` } colours={ colours } time={ alert.time } dismissible={ this.isDismissible() && this.hasAutoTimeout() }>
-            <div className='container'>
-              <div className='cell'>
-                { alert.message}
-                { this.renderClose() }
-              </div>
+        <AlertWrapper className={ `alert ${ alert.type }` } colours={ colours } time={ alert.time } dismissible={ this.isDismissible() && this.hasAutoTimeout() }>
+          <div className='container'>
+            <div className='cell'>
+              { alert.message }
+              { this.renderClose() }
             </div>
-          </AlertWrapper>
+          </div>
+        </AlertWrapper>
       );
     }
     return null;
@@ -61,9 +60,9 @@ Alert.defaultProps = {
     success: '#00A44C'
   },
   closeIcon: <span>X</span>,
-  clearAlert: (id) => console.log('Clear alert ' + id),
-  setAlertClear: (id, time) => console.log('Alert ' + id + ' will clear in ' + time + ' seconds')
-}
+  clearAlert: (id) => console.log(`Clear alert ${ id }`),
+  setAlertClear: (id, time) => console.log(`Alert ${ id } will clear in ${ time } seconds`)
+};
 
 Alert.propTypes = {
   alert: PropTypes.any.isRequired,

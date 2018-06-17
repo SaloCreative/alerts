@@ -18,7 +18,7 @@ const id = Math.floor((Math.random() * 9999) + 1000);
 const alerts = [{
   message: 'My alert message text',
   type: 'success',
-  dismissible: false,
+  dismissible: true,
   time: 10,
   id
 }];
