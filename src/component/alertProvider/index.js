@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 // COMPONENTS
 import { Provider as AlertsProvider, addAlert, removeAlert } from '../../index';
 
-const id = Math.floor((Math.random() * 9999) + 1000);
-
 export default class AlertProvider extends React.Component {
   constructor() {
     super();
