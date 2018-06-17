@@ -10,14 +10,14 @@ export default class AlertProvider extends React.Component {
   constructor() {
     super();
     this.deleteAlert = (alertID) => {
-      this.setState({ alerts: removeAlert(alertID, this.state.alert) });
+      this.setState({ alerts: removeAlert(alertID, this.state.alerts) });
     };
     this.insertAlert = (alert) => {
-      this.setState({ alerts: addAlert(alert, this.state.alert) });
+      this.setState({ alerts: addAlert(alert, this.state.alerts) });
     };
     this.timoutAlert = (alertID, time) => {
       setTimeout(() => {
-        this.setState({ alerts: removeAlert(alertID, this.state.alert) });
+        this.setState({ alerts: removeAlert(alertID, this.state.alerts) });
       }, time * 1000);
     };
     this.state = {

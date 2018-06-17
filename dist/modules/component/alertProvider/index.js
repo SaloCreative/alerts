@@ -38,14 +38,14 @@ var AlertProvider = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AlertProvider.__proto__ || Object.getPrototypeOf(AlertProvider)).call(this));
 
     _this.deleteAlert = function (alertID) {
-      _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alert) });
+      _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alerts) });
     };
     _this.insertAlert = function (alert) {
-      _this.setState({ alerts: (0, _index.addAlert)(alert, _this.state.alert) });
+      _this.setState({ alerts: (0, _index.addAlert)(alert, _this.state.alerts) });
     };
     _this.timoutAlert = function (alertID, time) {
       setTimeout(function () {
-        _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alert) });
+        _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alerts) });
       }, time * 1000);
     };
     _this.state = {
