@@ -5,6 +5,7 @@ export { default as Alert } from './component/alert';
 export { default as AlertsContainer } from './component/alertsContainer';
 export { default as AlertProvider } from './component/alertProvider';
 export { default as AlertConsumer } from './component/alertConsumer';
+export { default as withAlerts } from './context/hoc';
 
 export {
   removeAlert,
