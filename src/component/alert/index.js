@@ -35,16 +35,20 @@ class Alert extends React.Component {
   }
 
   render() {
-    const { alert, colours } = this.props;
+    const { alert, colours, alertStyle, alertStyleString } = this.props;
+
     if (alert) {
       return (
-        <AlertWrapper className={ `alert ${ alert.type }` } colours={ colours } time={ alert.time } dismissible={ this.isDismissible() && this.hasAutoTimeout() }>
-          <div className='container'>
-            <div className='cell'>
-              { alert.message }
-              { this.renderClose() }
-            </div>
-          </div>
+        <AlertWrapper
+          className={ `alert ${ alert.type }` }
+          colours={ colours }
+          time={ alert.time }
+          style={ alertStyle }
+          styleString={ alertStyleString }
+          dismissible={ this.isDismissible() && this.hasAutoTimeout() }
+        >
+          { alert.message }
+          { this.renderClose() }
         </AlertWrapper>
       );
     }
@@ -59,6 +63,8 @@ Alert.defaultProps = {
     info: '#8F8F8F',
     success: '#00A44C'
   },
+  alertStyleString: '',
+  alertStyle: {},
   closeIcon: <span>X</span>,
   clearAlert: (id) => console.log(`Clear alert ${ id }`),
   setAlertClear: (id, time) => console.log(`Alert ${ id } will clear in ${ time } seconds`)
@@ -69,7 +75,15 @@ Alert.propTypes = {
   setAlertClear: PropTypes.func,
   clearAlert: PropTypes.func,
   colours: PropTypes.object,
-  closeIcon: PropTypes.any
+  closeIcon: PropTypes.any,
+  /**
+   * Styles which will be added to the alerts as a object `style={alertStyle}`
+   */
+  alertStyle: PropTypes.object,
+  /**
+   * Styles which will be passed and executed directly in th alert container styled component
+   */
+  alertStyleString: PropTypes.string
 };
 
 export default Alert;
