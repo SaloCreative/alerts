@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
   position: fixed;
-  top: ${ props => props.topOffset }px;
+  top: ${ ({ topOffset }) => topOffset }px;
   left: 0;
+  width: 100%;
   z-index: 9999;
+
+  ${ ({ styleString }) => styleString }
 `;

@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import withReadme from 'storybook-readme/with-readme';
 import { withKnobs, select, boolean, number } from '@storybook/addon-knobs';
+import styled from 'styled-components';
 
 // FEATURED COMPONENT //
 import { Alert } from '../../index';
@@ -46,7 +47,43 @@ stories.add(
     return (
       <Alert
         alert={ newAlert }
+        alertStyleString='padding: 10px;'
+        alertStyle={ { outline: '2px solid #bada55' } }
       />
+    );
+  })
+);
+
+const Tall = styled.div`
+  height: 300vh;
+`;
+
+stories.add(
+  'Behaviour',
+  withInfo({ text: 'Tall page so you can scroll 🤖' })(() => {
+    const type = select('Type', {
+      'success': 'success',
+      'error': 'error',
+      'info': 'info',
+      'warning': 'warning'
+    }, 'success');
+
+    const dismissible = boolean('Dismissible', false);
+
+    const time = number('Time', 10);
+
+    const newAlert = {
+      ...alert,
+      type,
+      dismissible,
+      time
+    };
+    return (
+      <Tall>
+        <Alert
+          alert={ newAlert }
+        />
+      </Tall>
     );
   })
 );

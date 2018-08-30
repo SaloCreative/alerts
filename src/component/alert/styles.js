@@ -11,38 +11,46 @@ export const loadSwipe = keyframes`
 
 export const AlertWrapper = styled.div`
   width: 100%;
-  background: ${ props => props.colours.success };
+  background: ${ ({ colours }) => colours.success };
   color: #fff;
   padding: 5px 10px;
   font-size: 12px;
   text-align: left;
-  height: 40px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   position: relative;
+
   &.error {
-    background: ${ props => props.colours.error };
+    background: ${ ({ colours }) => colours.error };
   }
+
   &.warning {
-    background: ${ props => props.colours.warning };
+    background: ${ ({ colours }) => colours.warning };
   }
+
   &.info {
-    background: ${ props => props.colours.info };
+    background: ${ ({ colours }) => colours.info };
   }
-  &:after {
-    display: block;
-    content: "";
-    width: 100%;
-    left: 0;
-    top: 0;
-    position: absolute;
-    height: ${ props => (props.dismissible ? '2px' : '0px') };
-    background: rgba(255,255,255,0.3);
-    webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    webkit-animation: ${ loadSwipe } ${ props => (props.time ? props.time : 5) }s linear;
-    animation: ${ loadSwipe } ${ props => (props.time ? props.time : 5) }s linear infinite;      
-  }
+
+  ${ ({ dismissible, time }) => (dismissible ? `
+    &:after {
+      display: block;
+      content: "";
+      width: 100%;
+      left: 0;
+      top: 0;
+      position: absolute;
+      height: 0.4em;
+      background: rgba(255,255,255,0.3);
+      webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      webkit-animation: ${ loadSwipe } ${ (time || 5) }s linear;
+      animation: ${ loadSwipe } ${ (time || 5) }s linear infinite;
+    }
+  ` : '') };
+
+  ${ ({ styleString }) => styleString }
 `;
 
 export const Close = styled.a`
@@ -57,6 +65,7 @@ export const Close = styled.a`
   opacity: 0.6;
   cursor: pointer;
   transition: opacity 0.3s linear;
+
   &:hover {
     opacity: 1;
   }
