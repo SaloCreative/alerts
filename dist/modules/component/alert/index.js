@@ -85,22 +85,24 @@ var Alert = function (_React$Component) {
     value: function render() {
       var _props3 = this.props,
           alert = _props3.alert,
-          colours = _props3.colours;
+          colours = _props3.colours,
+          alertStyle = _props3.alertStyle,
+          alertStyleString = _props3.alertStyleString;
+
 
       if (alert) {
         return _react2.default.createElement(
           _styles.AlertWrapper,
-          { className: 'alert ' + alert.type, colours: colours, time: alert.time, dismissible: this.isDismissible() && this.hasAutoTimeout() },
-          _react2.default.createElement(
-            'div',
-            { className: 'container' },
-            _react2.default.createElement(
-              'div',
-              { className: 'cell' },
-              alert.message,
-              this.renderClose()
-            )
-          )
+          {
+            className: 'alert ' + alert.type,
+            colours: colours,
+            time: alert.time,
+            style: alertStyle,
+            styleString: alertStyleString,
+            dismissible: this.isDismissible() && this.hasAutoTimeout()
+          },
+          alert.message,
+          this.renderClose()
         );
       }
       return null;
@@ -117,6 +119,8 @@ Alert.defaultProps = {
     info: '#8F8F8F',
     success: '#00A44C'
   },
+  alertStyleString: '',
+  alertStyle: {},
   closeIcon: _react2.default.createElement(
     'span',
     null,
@@ -135,7 +139,15 @@ Alert.propTypes = {
   setAlertClear: _propTypes2.default.func,
   clearAlert: _propTypes2.default.func,
   colours: _propTypes2.default.object,
-  closeIcon: _propTypes2.default.any
+  closeIcon: _propTypes2.default.any,
+  /**
+   * Styles which will be added to the alerts as a object `style={alertStyle}`
+   */
+  alertStyle: _propTypes2.default.object,
+  /**
+   * Styles which will be passed and executed directly in th alert container styled component
+   */
+  alertStyleString: _propTypes2.default.string
 };
 
 exports.default = Alert;

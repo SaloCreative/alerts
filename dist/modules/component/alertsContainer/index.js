@@ -47,16 +47,27 @@ var AlertsContainer = function (_React$Component) {
           _clearAlert = _props.clearAlert,
           _setAlertClear = _props.setAlertClear,
           closeIcon = _props.closeIcon,
-          colours = _props.colours;
+          colours = _props.colours,
+          alertStyleString = _props.alertStyleString,
+          alertStyle = _props.alertStyle,
+          containerStyleString = _props.containerStyleString,
+          containerStyle = _props.containerStyle;
+
 
       if (alerts.length > 0) {
         return _react2.default.createElement(
           _styles.Container,
-          { topOffset: topOffset },
+          {
+            styleString: containerStyleString,
+            style: containerStyle,
+            topOffset: topOffset
+          },
           alerts.map(function (alert, i) {
             return _react2.default.createElement(_index.Alert, {
               key: alert.id,
               i: i,
+              alertStyleString: alertStyleString,
+              alertStyle: alertStyle,
               alert: alert,
               closeIcon: closeIcon,
               colours: colours,
@@ -81,7 +92,26 @@ exports.default = AlertsContainer;
 
 
 AlertsContainer.propTypes = {
+  /**
+   * Array of alarts to render
+   */
   alerts: _propTypes2.default.array,
+  /**
+   * Styles which will be added to the alerts as a object `style={alertStyle}`
+   */
+  alertStyle: _propTypes2.default.object,
+  /**
+   * Styles which will be passed and executed directly in th alert container styled component
+   */
+  alertStyleString: _propTypes2.default.string,
+  /**
+   * Styles which will be added to the container as a object `style={containerStyle}`
+   */
+  containerStyle: _propTypes2.default.object,
+  /**
+   * Styles which will be passed and executed directly in th container styled component
+   */
+  containerStyleString: _propTypes2.default.string,
   closeIcon: _propTypes2.default.any,
   colours: _propTypes2.default.object,
   topOffset: _propTypes2.default.number,
@@ -90,6 +120,10 @@ AlertsContainer.propTypes = {
 };
 
 AlertsContainer.defaultProps = {
+  containerStyleString: '',
+  containerStyle: {},
+  alertStyleString: '',
+  alertStyle: {},
   alerts: [],
   closeIcon: _react2.default.createElement(
     'span',
