@@ -4,7 +4,8 @@ const { Provider, Consumer } = createContext({
   alerts: [],
   deleteAlert: () => {},
   insertAlert: () => {},
-  timoutAlert: () => {}
+  timoutAlert: () => {},
+  clearAll: () => {}
 });
 
 export { Provider, Consumer };

@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -66,17 +68,25 @@ var AlertProvider = function (_React$Component) {
     _this.deleteAlert = function (alertID) {
       _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alerts) });
     };
+
     _this.insertAlert = function (alert) {
       _this.setState({ alerts: (0, _index.addAlert)(alert, _this.state.alerts) });
     };
+
+    _this.clearAll = function () {
+      _this.setState({ alerts: [] });
+    };
+
     _this.timoutAlert = function (alertID, time) {
       setTimeout(function () {
         _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alerts) });
       }, time * 1000);
     };
+
     _this.state = {
       alertsToMerge: [],
       alerts: [],
+      clearAll: _this.clearAll,
       deleteAlert: _this.deleteAlert,
       insertAlert: _this.insertAlert,
       timoutAlert: _this.timoutAlert
@@ -92,11 +102,14 @@ var AlertProvider = function (_React$Component) {
           alerts = _state.alerts,
           deleteAlert = _state.deleteAlert,
           insertAlert = _state.insertAlert,
-          timoutAlert = _state.timoutAlert;
+          timoutAlert = _state.timoutAlert,
+          clearAll = _state.clearAll;
+
+      console.log('alertProvider => ', _extends({}, this.state));
 
       return _react2.default.createElement(
         _index.Provider,
-        { value: { alerts: alerts, deleteAlert: deleteAlert, insertAlert: insertAlert, timoutAlert: timoutAlert } },
+        { value: { alerts: alerts, deleteAlert: deleteAlert, insertAlert: insertAlert, timoutAlert: timoutAlert, clearAll: clearAll } },
         children
       );
     }

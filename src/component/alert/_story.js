@@ -47,8 +47,6 @@ stories.add(
     return (
       <Alert
         alert={ newAlert }
-        alertStyleString='padding: 10px;'
-        alertStyle={ { outline: '2px solid #bada55' } }
       />
     );
   })

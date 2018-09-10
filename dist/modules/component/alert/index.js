@@ -87,20 +87,18 @@ var Alert = function (_React$Component) {
           alert = _props3.alert,
           colours = _props3.colours;
 
+
       if (alert) {
         return _react2.default.createElement(
           _styles.AlertWrapper,
-          { className: 'alert ' + alert.type, colours: colours, time: alert.time, dismissible: this.isDismissible() && this.hasAutoTimeout() },
-          _react2.default.createElement(
-            'div',
-            { className: 'container' },
-            _react2.default.createElement(
-              'div',
-              { className: 'cell' },
-              alert.message,
-              this.renderClose()
-            )
-          )
+          {
+            className: 'alert ' + alert.type,
+            colours: colours,
+            time: alert.time,
+            dismissible: this.isDismissible() && this.hasAutoTimeout()
+          },
+          alert.message,
+          this.renderClose()
         );
       }
       return null;

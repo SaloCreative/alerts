@@ -24,12 +24,13 @@ export default function withAlerts(WrappedComponent) {
   const ForwardRef = React.forwardRef((props, ref) => {
     return (
       <AlertsConsumer>
-        { ({ alerts, deleteAlert, insertAlert }) => {
+        { ({ alerts, deleteAlert, insertAlert, clearAll }) => {
           return (
             <AlertContext
               { ...props }
               alerts={ alerts }
               deleteAlert={ deleteAlert }
+              clearAll={ clearAll }
               insertAlert={ insertAlert }
               ref={ ref }
             />
