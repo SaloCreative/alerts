@@ -49,8 +49,6 @@ export const AlertWrapper = styled.div`
       animation: ${ loadSwipe } ${ (time || 5) }s linear infinite;
     }
   ` : '') };
-
-  ${ ({ styleString }) => styleString }
 `;
 
 export const Close = styled.a`

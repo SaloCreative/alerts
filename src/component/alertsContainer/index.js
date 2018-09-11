@@ -14,8 +14,6 @@ export default class AlertsContainer extends React.Component {
       setAlertClear,
       closeIcon,
       colours,
-      alertStyleString,
-      alertStyle,
       containerStyleString,
       containerStyle
     } = this.props;
@@ -27,19 +25,31 @@ export default class AlertsContainer extends React.Component {
           style={ containerStyle }
           topOffset={ topOffset }
         >
-          { alerts.map((alert, i) => (
-            <Alert
-              key={ alert.id }
-              i={ i }
-              alertStyleString={ alertStyleString }
-              alertStyle={ alertStyle }
-              alert={ alert }
-              closeIcon={ closeIcon }
-              colours={ colours }
-              clearAlert={ (id) => clearAlert(id) }
-              setAlertClear={ (id, time) => setAlertClear(id, time) }
-            />
-          )) }
+          { alerts.map((alert, i) => {
+            if (typeof alert.render === 'function') {
+              return (
+                alert.render({
+                  i,
+                  alert,
+                  closeIcon,
+                  colours,
+                  clearAlert: (id) => clearAlert(id),
+                  setAlertClear: (id, time) => setAlertClear(id, time)
+                })
+              );
+            }
+            return (
+              <Alert
+                key={ alert.id }
+                i={ i }
+                alert={ alert }
+                closeIcon={ closeIcon }
+                colours={ colours }
+                clearAlert={ (id) => clearAlert(id) }
+                setAlertClear={ (id, time) => setAlertClear(id, time) }
+              />
+            );
+          }) }
         </Container>
       );
     }
@@ -52,14 +62,6 @@ AlertsContainer.propTypes = {
    * Array of alarts to render
    */
   alerts: PropTypes.array,
-  /**
-   * Styles which will be added to the alerts as a object `style={alertStyle}`
-   */
-  alertStyle: PropTypes.object,
-  /**
-   * Styles which will be passed and executed directly in th alert container styled component
-   */
-  alertStyleString: PropTypes.string,
   /**
    * Styles which will be added to the container as a object `style={containerStyle}`
    */
@@ -78,8 +80,6 @@ AlertsContainer.propTypes = {
 AlertsContainer.defaultProps = {
   containerStyleString: '',
   containerStyle: {},
-  alertStyleString: '',
-  alertStyle: {},
   alerts: [],
   closeIcon: <span>X</span>,
   colours: {

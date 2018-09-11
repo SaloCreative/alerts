@@ -68,11 +68,13 @@ function withAlerts(WrappedComponent) {
       function (_ref) {
         var alerts = _ref.alerts,
             deleteAlert = _ref.deleteAlert,
-            insertAlert = _ref.insertAlert;
+            insertAlert = _ref.insertAlert,
+            clearAll = _ref.clearAll;
 
         return _react2.default.createElement(AlertContext, _extends({}, props, {
           alerts: alerts,
           deleteAlert: deleteAlert,
+          clearAll: clearAll,
           insertAlert: insertAlert,
           ref: ref
         }));

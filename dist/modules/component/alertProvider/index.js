@@ -66,17 +66,25 @@ var AlertProvider = function (_React$Component) {
     _this.deleteAlert = function (alertID) {
       _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alerts) });
     };
+
     _this.insertAlert = function (alert) {
       _this.setState({ alerts: (0, _index.addAlert)(alert, _this.state.alerts) });
     };
+
+    _this.clearAll = function () {
+      _this.setState({ alerts: [] });
+    };
+
     _this.timoutAlert = function (alertID, time) {
       setTimeout(function () {
         _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alerts) });
       }, time * 1000);
     };
+
     _this.state = {
       alertsToMerge: [],
       alerts: [],
+      clearAll: _this.clearAll,
       deleteAlert: _this.deleteAlert,
       insertAlert: _this.insertAlert,
       timoutAlert: _this.timoutAlert
@@ -92,11 +100,13 @@ var AlertProvider = function (_React$Component) {
           alerts = _state.alerts,
           deleteAlert = _state.deleteAlert,
           insertAlert = _state.insertAlert,
-          timoutAlert = _state.timoutAlert;
+          timoutAlert = _state.timoutAlert,
+          clearAll = _state.clearAll;
+
 
       return _react2.default.createElement(
         _index.Provider,
-        { value: { alerts: alerts, deleteAlert: deleteAlert, insertAlert: insertAlert, timoutAlert: timoutAlert } },
+        { value: { alerts: alerts, deleteAlert: deleteAlert, insertAlert: insertAlert, timoutAlert: timoutAlert, clearAll: clearAll } },
         children
       );
     }

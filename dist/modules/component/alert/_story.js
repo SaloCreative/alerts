@@ -73,9 +73,7 @@ stories.add('Implementation', (0, _addonInfo.withInfo)({ text: 'Dropdown with kn
     time: time
   });
   return _react2.default.createElement(_index.Alert, {
-    alert: newAlert,
-    alertStyleString: 'padding: 10px;',
-    alertStyle: { outline: '2px solid #bada55' }
+    alert: newAlert
   });
 }));
 

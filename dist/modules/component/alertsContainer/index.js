@@ -48,8 +48,6 @@ var AlertsContainer = function (_React$Component) {
           _setAlertClear = _props.setAlertClear,
           closeIcon = _props.closeIcon,
           colours = _props.colours,
-          alertStyleString = _props.alertStyleString,
-          alertStyle = _props.alertStyle,
           containerStyleString = _props.containerStyleString,
           containerStyle = _props.containerStyle;
 
@@ -63,11 +61,23 @@ var AlertsContainer = function (_React$Component) {
             topOffset: topOffset
           },
           alerts.map(function (alert, i) {
+            if (typeof alert.render === 'function') {
+              return alert.render({
+                i: i,
+                alert: alert,
+                closeIcon: closeIcon,
+                colours: colours,
+                clearAlert: function clearAlert(id) {
+                  return _clearAlert(id);
+                },
+                setAlertClear: function setAlertClear(id, time) {
+                  return _setAlertClear(id, time);
+                }
+              });
+            }
             return _react2.default.createElement(_index.Alert, {
               key: alert.id,
               i: i,
-              alertStyleString: alertStyleString,
-              alertStyle: alertStyle,
               alert: alert,
               closeIcon: closeIcon,
               colours: colours,
@@ -97,14 +107,6 @@ AlertsContainer.propTypes = {
    */
   alerts: _propTypes2.default.array,
   /**
-   * Styles which will be added to the alerts as a object `style={alertStyle}`
-   */
-  alertStyle: _propTypes2.default.object,
-  /**
-   * Styles which will be passed and executed directly in th alert container styled component
-   */
-  alertStyleString: _propTypes2.default.string,
-  /**
    * Styles which will be added to the container as a object `style={containerStyle}`
    */
   containerStyle: _propTypes2.default.object,
@@ -122,8 +124,6 @@ AlertsContainer.propTypes = {
 AlertsContainer.defaultProps = {
   containerStyleString: '',
   containerStyle: {},
-  alertStyleString: '',
-  alertStyle: {},
   alerts: [],
   closeIcon: _react2.default.createElement(
     'span',
