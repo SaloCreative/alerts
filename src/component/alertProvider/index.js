@@ -44,6 +44,7 @@ export default class AlertProvider extends React.Component {
 
     this.timoutAlert = (alertID, time) => {
       setTimeout(() => {
+        // additional check to make sure alert hasn't already been dismissed.
         if (find(this.state.alerts, { id: alertID })) {
           this.setState({ alerts: removeAlert(alertID, this.state.alerts) });
         }
