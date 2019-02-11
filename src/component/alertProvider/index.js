@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map, union, isEmpty } from 'lodash';
+import { find, map, union, isEmpty } from 'lodash';
 
 // COMPONENTS
 import { Provider as AlertsProvider, addAlert, removeAlert } from '../../index';
@@ -44,7 +44,9 @@ export default class AlertProvider extends React.Component {
 
     this.timoutAlert = (alertID, time) => {
       setTimeout(() => {
-        this.setState({ alerts: removeAlert(alertID, this.state.alerts) });
+        if (find(this.state.alerts, { id: alertID })) {
+          this.setState({ alerts: removeAlert(alertID, this.state.alerts) });
+        }
       }, time * 1000);
     };
 
