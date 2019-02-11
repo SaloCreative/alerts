@@ -1,6 +1,6 @@
 {
   "name": "@salocreative/alerts",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Alerts for react. Uses context to manage alerts",
   "main": "./dist/modules/index.js",
   "scripts": {
@@ -72,8 +72,7 @@
     "unexpected-sinon": "~10.8.2",
     "url-loader": "^0.6.2",
     "webpack": "~3.6.0",
-    "webpack-dev-server": "~2.9.1",
-    "yarn": "1.0.2"
+    "webpack-dev-server": "~2.9.1"
   },
   "peerDependencies": {
     "immutability-helper": "^2.6.4",

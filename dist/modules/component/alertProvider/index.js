@@ -77,7 +77,10 @@ var AlertProvider = function (_React$Component) {
 
     _this.timoutAlert = function (alertID, time) {
       setTimeout(function () {
-        _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alerts) });
+        // additional check to make sure alert hasn't already been dismissed.
+        if ((0, _lodash.find)(_this.state.alerts, { id: alertID })) {
+          _this.setState({ alerts: (0, _index.removeAlert)(alertID, _this.state.alerts) });
+        }
       }, time * 1000);
     };
 
