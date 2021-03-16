@@ -1,3 +1,7 @@
+# DEPRECATED
+
+This package and repository is no longer supported or maintained.
+
 # Alert
 
 Alerts can be used in complete isolation but are designed to be used inside an alerts wrapper/provider to allow simplified state management.
